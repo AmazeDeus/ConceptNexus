@@ -80,6 +80,6 @@ export default function Home() {
 }
 
 /* keybinds:
-shift+space = select start of elemt to end of element
+shift+alt+q= select start of elemt to end of element
 shift+alt+o = remove unused imports
 */
