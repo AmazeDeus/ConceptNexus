@@ -38,10 +38,10 @@ const start = async () => {
   app.use((req, res) => nextHandler(req, res));
 
   nextApp.prepare().then(() => {
-    // payload.logger.ingo("Next.js started")
+    payload.logger.info("Next.js started")
 
     app.listen(PORT, async () => {
-      // payload.logger.ingo(`Next.js App Url: ${process.env.NEXT_PUBLIC_SERVER_URL}`)
+      payload.logger.info(`Next.js App Url: ${process.env.NEXT_PUBLIC_SERVER_URL}`)
     });
   });
 };
