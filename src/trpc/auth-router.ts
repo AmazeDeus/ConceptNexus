@@ -2,12 +2,14 @@ import { AuthCredentialsValidator } from '../lib/validators/account-credentials-
 import { publicProcedure, router } from './trpc';
 import { getPayloadClient } from '../get-payload';
 import { TRPCError } from '@trpc/server';
+import { z } from 'zod';
 
 // publicProcedure is open to everyone
 export const authRouter = router({
   createPayloadUser: publicProcedure
     .input(AuthCredentialsValidator)
     .mutation(async ({ input }) => {
+      // input is available from the input method chain
       const { email, password } = input;
       const payload = await getPayloadClient(); // CMS
 
@@ -38,5 +40,24 @@ export const authRouter = router({
       });
 
       return { success: true, sentToEmail: email };
+    }),
+
+  verifyEmail: publicProcedure
+    .input(z.object({ token: z.string() }))
+    .query(async ({ input }) => {
+      const { token } = input;
+
+      // requires the CMS client that makes it possible to verify the email
+      const payload = await getPayloadClient();
+
+      // Define the collection we are trying to verify a person on
+      const isVerified = await payload.verifyEmail({
+        collection: 'users',
+        token,
+      });
+
+      if (!isVerified) throw new TRPCError({ code: 'UNAUTHORIZED' });
+
+      return { success: true };
     }),
 });
