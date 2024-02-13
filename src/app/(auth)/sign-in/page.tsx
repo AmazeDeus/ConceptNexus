@@ -1,3 +1,4 @@
+// Location: src\app\(auth)\sign-in\page.tsx
 'use client';
 import { Icons } from '@/components/Icons';
 import { Button, buttonVariants } from '@/components/ui/button';
@@ -40,11 +41,8 @@ const Page = () => {
   });
 
   const { mutate: signIn, isLoading } = trpc.auth.signIn.useMutation({
-    onSuccess: () => {
+    onSuccess: (data) => {
       toast.success('Signed in successfully');
-
-      // Show fresh info in navbar. It will contain different states of logged in/logged out.
-      router.refresh();
 
       if (origin) {
         router.push(`/${origin}`);
@@ -57,6 +55,9 @@ const Page = () => {
       }
 
       router.push('/');
+
+      // Show fresh info in navbar.
+      router.refresh();
     },
     onError: (err) => {
       if (err.data?.code === 'UNAUTHORIZED') {
