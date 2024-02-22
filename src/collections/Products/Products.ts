@@ -1,22 +1,79 @@
+import { BeforeChangeHook } from 'payload/dist/collections/config/types';
 import { PRODUCT_CATEGORIES } from '../../config';
 import { CollectionConfig } from 'payload/types';
+import { Product } from '../../payload-types';
+import { stripe } from '../../lib/stripe';
+
+const addUser: BeforeChangeHook<Product> = async ({ req, data }) => {
+  const user = req.user;
+
+  // Extend the data used to create the product
+  return { ...data, user: user.id };
+};
 
 export const Products: CollectionConfig = {
   slug: 'products',
   admin: {
     useAsTitle: 'name',
   },
-  access: {}, // Who can access which parts of which products
+  access: {},
+  hooks: {
+    // Generate neccessary data when creating new products
+    beforeChange: [
+      addUser,
+      async (args) => {
+        // Multiple operations when handling products with Stripe
+        if (args.operation === 'create') {
+          const data = args.data as Product;
+
+          // Create product in Stripe
+          const createdProduct = await stripe.products.create({
+            name: data.name,
+            default_price_data: {
+              currency: 'USD',
+              unit_amount: Math.round(data.price * 100), // Price in cents
+            },
+          });
+
+          // Overwrite data with neccessary properties
+          const updated: Product = {
+            ...data,
+            stripeId: createdProduct.id,
+            priceId: createdProduct.default_price as string,
+          };
+
+          return updated;
+        } else if (args.operation === 'update') {
+          const data = args.data as Product;
+
+          // Update product in Stripe
+          const updatedProduct = await stripe.products.update(data.stripeId!, {
+            name: data.name,
+            default_price: data.priceId!,
+          });
+
+          // Overwrite data with neccessary properties
+          const updated: Product = {
+            ...data,
+            stripeId: updatedProduct.id,
+            priceId: updatedProduct.default_price as string,
+          };
+
+          return updated;
+        }
+      },
+    ],
+  },
   fields: [
     {
-      // Each prdocust associates with a user
+      // Each product associates with a user
       name: 'user',
       type: 'relationship',
       relationTo: 'users',
       required: true,
       hasMany: false, // product can only have one user
       admin: {
-        condition: () => false, // hide field from admin dashboard
+        condition: () => false,
       },
     },
     {

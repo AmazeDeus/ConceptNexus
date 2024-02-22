@@ -20,6 +20,7 @@
 .DS_Store
 *.pem
 notes.md
+/architecture_mockup
 
 # debug
 npm-debug.log*
