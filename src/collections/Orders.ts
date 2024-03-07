@@ -1,5 +1,3 @@
-/* Author's note: Tips in notes.md */
-
 import { Access, CollectionConfig } from 'payload/types';
 
 const yourOwn: Access = ({ req: { user } }) => {
@@ -16,7 +14,7 @@ export const Orders: CollectionConfig = {
   slug: 'orders',
   admin: {
     useAsTitle: 'Your Orders',
-    description: 'A summary of all your orders on Niereon Nexus.',
+    description: 'A summary of all your orders on Concept Nexus.',
   },
   access: {
     read: yourOwn,

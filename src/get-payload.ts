@@ -56,7 +56,7 @@ export const getPayloadClient = async ({
         // fromAddress would be your own domain or custom email when deploying
         // Emails seems to only arrive for the same email that was registered on Resend, likely some spam measure
         fromAddress: 'onboarding@resend.dev',
-        fromName: 'Niereon Nexus',
+        fromName: 'Concept Nexus',
       },
       secret: process.env.PAYLOAD_SECRET,
       local: initOptions?.express ? false : true,

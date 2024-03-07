@@ -1,5 +1,5 @@
 {
-  "name": "niereon-nexus",
+  "name": "concept-nexus",
   "version": "0.1.0",
   "private": true,
   "main": "dist/server.js",

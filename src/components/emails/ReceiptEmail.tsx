@@ -39,7 +39,7 @@ export const ReceiptEmail = ({
   return (
     <Html>
       <Head />
-      <Preview>Your Niereon Nexus Receipt</Preview>
+      <Preview>Your Concept Nexus Receipt</Preview>
 
       <Body style={main}>
         <Container style={container}>
@@ -49,7 +49,7 @@ export const ReceiptEmail = ({
                 src={`${process.env.NEXT_PUBLIC_SERVER_URL}/email-sent.png`}
                 width='100'
                 height='100'
-                alt='Niereon Nexus'
+                alt='Concept Nexus'
               />
             </Column>
 
@@ -166,7 +166,7 @@ export const ReceiptEmail = ({
             <Link href='#'>Privacy Policy </Link>
           </Text>
           <Text style={footerCopyright}>
-            Copyright © 2024 Niereon Inc. <br />{' '}
+            Copyright © 2024 Concept Nexus Inc. <br />{' '}
             <Link href='#'>All rights reserved</Link>
           </Text>
         </Container>

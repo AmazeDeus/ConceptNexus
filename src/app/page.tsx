@@ -21,21 +21,28 @@ const perks = [
     name: 'Exclusive Access',
     Icon: Leaf,
     description:
-      'Access exclusive concept art collections and limited edition prints :)',
+      'Access exclusive concept resource collections and limited edition prints :)',
   },
 ];
 
 export default function Home() {
   return (
     <>
+      <div className='hidden lg:h-96 relative sm:flex lg:overflow-hidden justify-center lg:items-center'>
+        <div className='w-full'>
+          <video src='/banner_vid.mp4' className='w-full' autoPlay muted loop />
+        </div>
+        <span className='absolute bottom-0 right-0 p-4 text-muted-foreground'>&rarr; Made with runwayml</span>
+      </div>
+
       <MaxWidthWrapper>
         <div className='py-20 mx-auto text-center flex flex-col items-center max-w-3xl'>
           <h1 className='text-4-xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
-            Welcome to Nexus! A marketplace for high-quality{' '}
-            <span className='text-purple-600'>digital assets</span>.
+            Welcome to The Nexus! Your central hub for high-quality{' '}
+            <span className='text-purple-600'>digital resources</span>.
           </h1>
           <p className='mt-6 text-lg max-w-prose text-muted-foreground'>
-            Welcome to Niereon Nexus. Every asset on this platform is verified
+            Welcome to Concept Nexus. Every asset on this platform is verified
             to ensure the highest quality standards.
           </p>
           <div className='flex flex-col sm:flex-row gap-4 mt-6'>
@@ -83,8 +90,3 @@ export default function Home() {
     </>
   );
 }
-
-/* keybinds:
-shift+alt+q= select start of elemt to end of element
-shift+alt+o = remove unused imports
-*/

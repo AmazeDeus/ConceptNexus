@@ -1,5 +1,3 @@
-/* Author's note: Tips in notes.md */
-
 import { User } from '../payload-types';
 import { BeforeChangeHook } from 'payload/dist/collections/config/types';
 import { Access, CollectionConfig } from 'payload/types';

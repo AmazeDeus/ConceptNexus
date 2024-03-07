@@ -24,7 +24,7 @@ export default buildConfig({
     user: 'users',
     bundler: webpackBundler(),
     meta: {
-      titleSuffix: ' - Niereon Nexus',
+      titleSuffix: ' - Concept Nexus',
       favicon: '/favicon.ico',
       ogImage: '/thumbnail.jpg', // For sharing the app
     },
