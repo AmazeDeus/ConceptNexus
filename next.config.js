@@ -8,7 +8,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'concept-nexus.vercel.app',
+        hostname: 'conceptnexus-production.up.railway.app',
       },
     ],
   },
