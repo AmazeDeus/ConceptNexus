@@ -30,7 +30,7 @@ export default buildConfig({
     },
   },
   rateLimit: {
-    max: 2000, // For development
+    max: process.env.NODE_ENV === 'production' ? 500 : 2000, // For development, use something like 2000
   },
   editor: slateEditor({}),
   db: mongooseAdapter({

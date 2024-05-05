@@ -1,5 +1,6 @@
 import VerifyEmail from '@/components/VerifyEmail';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface PageProps {
   searchParams: {
@@ -38,6 +39,15 @@ const VerifyEmailPage = ({ searchParams }: PageProps) => {
             )}
           </div>
         )}
+
+        {!process.env.RESEND_EMAIL && (
+          <p className='text-green-700 text-center'>
+            This is simply to display how email verification would work.
+            Currently, there is no custom email domain setup, so you are free to
+            {' '}&rarr; <Link href='/sign-in' className='underline'>sign in</Link>.
+          </p>
+        )}
+
       </div>
     </div>
   );

@@ -91,6 +91,15 @@ const ThankYouPage = async ({ searchParams }: PageProps) => {
               </p>
             )}
 
+            {!process.env.RESEND_EMAIL && (
+              <div className='mt-8'>
+                <p className='text-green-700 text-center'>
+                  This is simply to display how a successful order would work.
+                  Currently, there is no custom email domain setup, so no receipts are sent.
+                </p>
+              </div>
+            )}
+
             <div className='mt-16 text-sm font-medium'>
               <div className='text-muted-foreground'>Order nr.</div>
               <div className='mt-2 text-gray-900'>{order.id}</div>

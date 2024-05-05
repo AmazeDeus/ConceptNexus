@@ -41,7 +41,7 @@ export const paymentRouter = router({
       const order = await payload.create({
         collection: 'orders',
         data: {
-          _isPaid: false,
+          _isPaid: !process.env.RESEND_EMAIL ? true : false,
           products: filteredProducts.map((prod) => prod.id),
           user: user.id,
         },
